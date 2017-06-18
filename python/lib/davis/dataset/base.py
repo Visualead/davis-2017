@@ -61,6 +61,8 @@ class BaseLoader(ImageCollection):
     super(BaseLoader, self).__init__(
         osp.join(path + '/' + regex),load_func=load_func)
 
+    print path
+
     # Sequence name
     self.name = osp.basename(path)
 
