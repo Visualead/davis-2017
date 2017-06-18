@@ -12,7 +12,7 @@ __version__ = '2.0.0'
 
 from misc import log     # Logger
 from misc import cfg     # Configuration parameters
-from misc import phase   # Dataset working set (train,val,etc...)
+from misc import Phase   # Dataset working set (train,val,etc...)
 from misc import overlay # Overlay segmentation on top of RGB image
 from misc import Timer   # Timing utility class
 

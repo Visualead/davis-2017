@@ -50,14 +50,14 @@ def parse_args():
 
   parser.add_argument(
       '--phase','-p',default=cfg.PHASE.name,type=str,choices=[e.name.lower()
-        for e in davis.phase])
+        for e in davis.Phase])
 
   parser.add_argument('--single-object',action='store_true')
 
   args = parser.parse_args()
 
   # Cast string to Enum
-  args.phase = davis.phase[args.phase.upper()]
+  args.phase = davis.Phase[args.phase.upper()]
 
   return args
 

@@ -20,7 +20,7 @@ from easydict import EasyDict as edict
 
 from enum import Enum
 
-class phase(Enum):
+class Phase(Enum):
     TRAIN    = 'train'
     VAL      = 'val'
     TESTDEV  = 'test-dev'
@@ -43,7 +43,7 @@ __C.RESOLUTION="480p"
 # Dataset year: ("2016","2017")
 __C.YEAR ="2017"
 
-__C.PHASE = phase.VAL
+__C.PHASE = Phase.VAL
 
 # Multiobject evaluation (Set to False only when evaluating DAVIS 2016)
 __C.MULTIOBJECT = True
@@ -98,9 +98,9 @@ def db_read_sequences(year=None,db_phase=None):
         lambda s:int(s.year) <= int(year),sequences)
 
   if db_phase is not None:
-    if db_phase == phase.TRAINVAL:
+    if db_phase == Phase.TRAINVAL:
       sequences = filter(
-          lambda s: ((s.set == phase.VAL.value) or (s.set == phase.TRAIN.value)), sequences)
+          lambda s: ((s.set == Phase.VAL.value) or (s.set == Phase.TRAIN.value)), sequences)
     else:
       sequences = filter(
           lambda s:s.set == db_phase.value,sequences)
