@@ -91,18 +91,24 @@ def db_eval(db,segmentations,measures,n_jobs=cfg.N_JOBS,verbose=True):
 
   return g_eval
 
-def print_results(evaluation,method_name="-"):
+
+def print_results(evaluation, method_name="-"):
   """Print result in a table"""
 
   metrics = evaluation['dataset'].keys()
+  sequences = evaluation['sequence'].keys()
 
-  # Print results
-  table = PrettyTable(['Method']+[p[0]+'_'+p[1] for p in
-    itertools.product(metrics,cfg.EVAL.STATISTICS)])
+  table = PrettyTable(['Sequence'] + [p[0] + '_' + p[1] for p in
+                                      itertools.product(metrics, cfg.EVAL.STATISTICS)])
 
-  table.add_row([method_name]+["%.3f"%np.round(
-    evaluation['dataset'][metric][statistic],3) for metric,statistic in
-    itertools.product(metrics,cfg.EVAL.STATISTICS)])
+  sequences.sort()
+  for seq in sequences:
+    table.add_row([seq] + ["%.3f" % np.round(
+      np.mean(evaluation['sequence'][seq][metric][statistic]), 3) for metric, statistic in
+                           itertools.product(metrics, cfg.EVAL.STATISTICS)])
+
+  table.add_row(['Average'] + ["%.3f" % np.round(
+    evaluation['dataset'][metric][statistic], 3) for metric, statistic in
+                               itertools.product(metrics, cfg.EVAL.STATISTICS)])
 
   print "\n{}\n".format(str(table))
-
