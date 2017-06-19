@@ -92,7 +92,7 @@ def db_eval(db,segmentations,measures,n_jobs=cfg.N_JOBS,verbose=True):
   return g_eval
 
 
-def print_results(evaluation, method_name="-"):
+def print_results(evaluation, method_name="-", html_output=''):
   """Print result in a table"""
 
   metrics = evaluation['dataset'].keys()
@@ -110,5 +110,10 @@ def print_results(evaluation, method_name="-"):
   table.add_row(['Average'] + ["%.3f" % np.round(
     evaluation['dataset'][metric][statistic], 3) for metric, statistic in
                                itertools.product(metrics, cfg.EVAL.STATISTICS)])
+
+  # Save HTML Output
+  if html_output:
+    with open(html_output, 'w') as f:
+      f.write(table.get_html_string(border=True))
 
   print "\n{}\n".format(str(table))

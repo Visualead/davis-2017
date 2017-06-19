@@ -47,4 +47,5 @@ if __name__ == '__main__':
   with open(args.input,'r') as f:
     evaluation = edict(yaml.safe_load(f))
 
-  print_results(evaluation)
+  html_output = args.input.replace('yaml', 'html')
+  print_results(evaluation, html_output=html_output)
