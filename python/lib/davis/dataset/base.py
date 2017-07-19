@@ -63,6 +63,8 @@ class BaseLoader(ImageCollection):
 
     # Sequence name
     self.name = osp.basename(path)
+    if 'seg_prod' in path:
+      self.name = '/'.join(path.split('/')[-2:])
 
     # Check sequence name
     if not self.name in cfg.SEQUENCES:
