@@ -60,7 +60,7 @@ class BaseLoader(ImageCollection):
   def __init__(self,path,regex,load_func=None):
     super(BaseLoader, self).__init__(
         osp.join(path + '/' + regex),load_func=load_func)
-
+    print path
     # Sequence name
     self.name = osp.basename(path)
     if 'batch-000' in path:
